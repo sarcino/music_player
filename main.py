@@ -20,7 +20,7 @@ def browse_file():
     # make fileName variable global
     global filename
     filename = filedialog.askopenfilename()
-    print(filename)
+    statusBar["text"] = filename
 
 
 menuBar.add_cascade(label="File", menu=subMenu)
