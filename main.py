@@ -54,17 +54,31 @@ text.pack()
 
 # play button = play image
 def play_music():
+    # is paused initialized?
     try:
-        mixer.music.load(filename)
-        mixer.music.play()
-        statusBar["text"] = "Playing " + os.path.basename(filename)
-    except:
-        tkinter.messagebox.showerror("Not Found", "music_player couldn't find a file. Please check again.")
+        paused
+        # if paused is not initialized, try...
+    except NameError:
+        try:
+            mixer.music.load(filename)
+            mixer.music.play()
+            statusBar["text"] = "Playing " + os.path.basename(filename)
+        except:
+            tkinter.messagebox.showerror("Not Found", "music_player couldn't find a file. Please check again.")
+    # if paused was initialized, unpause music
+    else:
+        mixer.music.unpause()
 
 # stop button = stop image
 def stop_music():
     mixer.music.stop()
     statusBar["text"] = "Playback Stopped"
+
+def pause_music():
+    global paused
+    paused = TRUE
+    mixer.music.pause()
+    statusBar["text"] = "Playback Paused"
 
 def set_vol(val):
     # value is string, must be converted into integer
@@ -81,6 +95,11 @@ playBtn.pack()
 stop = PhotoImage(file="stop.png")
 stopBtn = Button(root, image=stop, command=stop_music)
 stopBtn.pack()
+
+# pause image
+pause = PhotoImage(file="pause.png")
+pauseBtn = Button(root, image=pause, command=pause_music)
+pauseBtn.pack()
 
 # volume control
 scale = Scale(root, from_=0, to=100, orient=HORIZONTAL, cursor="hand2", command_=set_vol)
