@@ -42,7 +42,7 @@ mixer.init()
 
 
 # size of the window after opening
-root.geometry("800x400")
+# root.geometry("600x400")
 # title of the window
 root.title("sarcino music_player")
 # icon, r = raw string
@@ -50,7 +50,7 @@ root.iconbitmap(r"icon.ico")
 
 # Label widget - every widget needs to be packed
 text = Label(root, text = "Let the music play!")
-text.pack()
+text.pack(pady=10)
 
 # play button = play image
 def play_music():
@@ -86,20 +86,27 @@ def set_vol(val):
     # set_volume function takes value from 0 to 1 only
     mixer.music.set_volume(volume)
 
+
+# creating frame for buttons - to be able to align them in one row
+middleframe = Frame(root)
+middleframe.pack(padx=10, pady=10)
+
+
 # play image - show in the default window
 play = PhotoImage(file="play.png")
-playBtn = Button(root, image=play, command=play_music)
-playBtn.pack()
+# play button is localized in middleframe, image variable play, function play music
+playBtn = Button(middleframe, image=play, command=play_music)
+playBtn.pack(side=LEFT, padx=5)
 
 # stop image - show in the default window
 stop = PhotoImage(file="stop.png")
-stopBtn = Button(root, image=stop, command=stop_music)
-stopBtn.pack()
+stopBtn = Button(middleframe, image=stop, command=stop_music)
+stopBtn.pack(side=LEFT, padx=5)
 
 # pause image
 pause = PhotoImage(file="pause.png")
-pauseBtn = Button(root, image=pause, command=pause_music)
-pauseBtn.pack()
+pauseBtn = Button(middleframe, image=pause, command=pause_music)
+pauseBtn.pack(side=LEFT, padx=5)
 
 # volume control
 scale = Scale(root, from_=0, to=100, orient=HORIZONTAL, cursor="hand2", command_=set_vol)
@@ -108,7 +115,7 @@ scale = Scale(root, from_=0, to=100, orient=HORIZONTAL, cursor="hand2", command_
 scale.set(25)
 # play 25 volume value
 mixer.music.set_volume(0.25)
-scale.pack()
+scale.pack(pady=20)
 
 # anchor = align of text, W is for west, left
 statusBar = Label(root, text="Welcome to music_player", relief=SUNKEN, anchor=W)
