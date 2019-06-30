@@ -89,24 +89,24 @@ def set_vol(val):
 
 # creating frame for buttons - to be able to align them in one row
 middleframe = Frame(root)
-middleframe.pack(padx=10, pady=10)
+middleframe.pack(pady=10)
 
 
 # play image - show in the default window
 play = PhotoImage(file="play.png")
 # play button is localized in middleframe, image variable play, function play music
 playBtn = Button(middleframe, image=play, command=play_music)
-playBtn.pack(side=LEFT, padx=5)
+playBtn.grid(row=0, column=0, padx=3)
 
 # stop image - show in the default window
 stop = PhotoImage(file="stop.png")
 stopBtn = Button(middleframe, image=stop, command=stop_music)
-stopBtn.pack(side=LEFT, padx=5)
+stopBtn.grid(row=0, column=1, padx=3)
 
 # pause image
 pause = PhotoImage(file="pause.png")
 pauseBtn = Button(middleframe, image=pause, command=pause_music)
-pauseBtn.pack(side=LEFT, padx=5)
+pauseBtn.grid(row=0, column=2, padx=3)
 
 # volume control
 scale = Scale(root, from_=0, to=100, orient=HORIZONTAL, cursor="hand2", command_=set_vol)
