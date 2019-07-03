@@ -42,13 +42,13 @@ mixer.init()
 
 
 # size of the window after opening
-# root.geometry("600x400")
+root.geometry("500x300")
 # title of the window
 root.title("sarcino music_player")
 # icon, r = raw string
 root.iconbitmap(r"icon.ico")
 
-# Label widget - every widget needs to be packed
+# Label widget. Eery widget needs to be packed
 text = Label(root, text = "Let the music play!")
 text.pack(pady=10)
 
@@ -80,11 +80,18 @@ def pause_music():
     mixer.music.pause()
     statusBar["text"] = "Playback Paused"
 
+def rewind_music():
+    play_music()
+
+
 def set_vol(val):
     # value is string, must be converted into integer
     volume = int(val) / 100
     # set_volume function takes value from 0 to 1 only
     mixer.music.set_volume(volume)
+
+
+
 
 
 # creating frame for buttons - to be able to align them in one row
@@ -107,6 +114,11 @@ stopBtn.grid(row=0, column=1, padx=3)
 pause = PhotoImage(file="pause.png")
 pauseBtn = Button(middleframe, image=pause, command=pause_music)
 pauseBtn.grid(row=0, column=2, padx=3)
+
+# rewind button
+rewind = PhotoImage(file="rewind.png")
+rewindBtn = Button(middleframe, image=rewind, command=rewind_music)
+rewindBtn.grid(row=0, column=3, padx=3)
 
 # volume control
 scale = Scale(root, from_=0, to=100, orient=HORIZONTAL, cursor="hand2", command_=set_vol)
