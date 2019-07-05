@@ -2,8 +2,6 @@
 
 Creating a music player which can also play audios from YouTube and track music through Last.fm scrobbling. Still in progress
 
-### Installing
-
 ## Built With
 
 * [Python](https://www.python.org)
