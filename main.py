@@ -40,15 +40,14 @@ subMenu.add_command(label="About", command=about)
 # initialize mixer which allows us to play music files
 mixer.init()
 
-
 # size of the window after opening
-root.geometry("500x300")
+# root.geometry("500x300")
 # title of the window
 root.title("sarcino music_player")
 # icon, r = raw string
 root.iconbitmap(r"icon.ico")
 
-# Label widget. Eery widget needs to be packed
+# Label widget. Every widget needs to be packed
 text = Label(root, text = "Let the music play!")
 text.pack(pady=10)
 
@@ -90,13 +89,17 @@ def set_vol(val):
     # set_volume function takes value from 0 to 1 only
     mixer.music.set_volume(volume)
 
-
+def mute_music():
+    pass
 
 
 
 # creating frame for buttons - to be able to align them in one row
 middleframe = Frame(root)
-middleframe.pack(pady=10)
+middleframe.pack(pady=10, padx=30)
+
+bottomframe = Frame(root)
+bottomframe.pack(pady=10, padx=30)
 
 
 # play image - show in the default window
@@ -120,14 +123,20 @@ rewind = PhotoImage(file="rewind.png")
 rewindBtn = Button(middleframe, image=rewind, command=rewind_music)
 rewindBtn.grid(row=0, column=3, padx=3)
 
+# mute/ unmute button
+mute = PhotoImage(file="mute.png")
+volume = PhotoImage(file="volume.png")
+volumeBtn = Button(bottomframe, image=volume, command=mute_music)
+volumeBtn.grid(row=0, column=2, padx=3)
+
 # volume control
-scale = Scale(root, from_=0, to=100, orient=HORIZONTAL, cursor="hand2", command_=set_vol)
+scale = Scale(bottomframe, from_=0, to=100, orient=HORIZONTAL, cursor="hand2", command_=set_vol)
 # default volume value when you open the player
 # show 25
 scale.set(25)
 # play 25 volume value
 mixer.music.set_volume(0.25)
-scale.pack(pady=20)
+scale.grid(row=0, column=0, pady=20, padx=20)
 
 # anchor = align of text, W is for west, left
 statusBar = Label(root, text="Welcome to music_player", relief=SUNKEN, anchor=W)
