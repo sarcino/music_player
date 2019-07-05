@@ -89,8 +89,26 @@ def set_vol(val):
     # set_volume function takes value from 0 to 1 only
     mixer.music.set_volume(volume)
 
+# by default is not False
+muted = False
+
 def mute_music():
-    pass
+    global muted
+    # if muted is true
+    if muted:
+        # set default values = unmute music
+        mixer.music.set_volume(0.25)
+        volumeBtn.configure(image=volume)
+        scale.set(25)
+        muted = False
+    else:
+        #mute the music
+        mixer.music.set_volume(0)
+        # once I clicked on the volume picture, it changes to the mute picture
+        volumeBtn.configure(image=mute)
+        # scale bar will show 0
+        scale.set(0)
+        muted = True
 
 
 
