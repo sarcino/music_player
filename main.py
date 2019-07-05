@@ -45,7 +45,7 @@ mixer.init()
 # title of the window
 root.title("sarcino music_player")
 # icon, r = raw string
-root.iconbitmap(r"icon.ico")
+root.iconbitmap(r"images/icon.ico")
 
 # Label widget. Every widget needs to be packed
 text = Label(root, text = "Let the music play!")
@@ -121,29 +121,29 @@ bottomframe.pack(pady=10, padx=30)
 
 
 # play image - show in the default window
-play = PhotoImage(file="play.png")
+play = PhotoImage(file="images/play.png")
 # play button is localized in middleframe, image variable play, function play music
 playBtn = Button(middleframe, image=play, command=play_music)
 playBtn.grid(row=0, column=0, padx=3)
 
 # stop image - show in the default window
-stop = PhotoImage(file="stop.png")
+stop = PhotoImage(file="images/stop.png")
 stopBtn = Button(middleframe, image=stop, command=stop_music)
 stopBtn.grid(row=0, column=1, padx=3)
 
 # pause image
-pause = PhotoImage(file="pause.png")
+pause = PhotoImage(file="images/pause.png")
 pauseBtn = Button(middleframe, image=pause, command=pause_music)
 pauseBtn.grid(row=0, column=2, padx=3)
 
 # rewind button
-rewind = PhotoImage(file="rewind.png")
+rewind = PhotoImage(file="images/rewind.png")
 rewindBtn = Button(middleframe, image=rewind, command=rewind_music)
 rewindBtn.grid(row=0, column=3, padx=3)
 
 # mute/ unmute button
-mute = PhotoImage(file="mute.png")
-volume = PhotoImage(file="volume.png")
+mute = PhotoImage(file="images/mute.png")
+volume = PhotoImage(file="images/volume.png")
 volumeBtn = Button(bottomframe, image=volume, command=mute_music)
 volumeBtn.grid(row=0, column=2, padx=3)
 
