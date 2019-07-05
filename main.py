@@ -156,6 +156,8 @@ scale.set(25)
 mixer.music.set_volume(0.25)
 scale.grid(row=0, column=0, pady=20, padx=20)
 
+
+
 # anchor = align of text, W is for west, left
 statusBar = Label(root, text="Welcome to music_player", relief=SUNKEN, anchor=W)
 statusBar.pack(side=BOTTOM, fill=X)
