@@ -1,6 +1,8 @@
 # music_player
 
-Creating a music player which can also play audios from YouTube and track music through Last.fm scrobbling. Still in progress
+Music player which will also play audios from YouTube and track music through Last.fm scrobbling.
+
+Still in progress
 
 ## Built With
 
