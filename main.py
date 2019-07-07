@@ -53,29 +53,33 @@ text.pack(pady=10)
 
 # play button = play image
 def play_music():
-    # is paused initialized?
-    try:
-        paused
-        # if paused is not initialized, try...
-    except NameError:
+    
+    global paused
+    # if paused button is true, unpause this
+    if paused:
+        mixer.music.unpause()
+        statusBar["text"] = "Music Resumed. Playing " + os.path.basename(filename)
+        # paused button is false again
+        paused = False
+    else:
         try:
             mixer.music.load(filename)
             mixer.music.play()
             statusBar["text"] = "Playing " + os.path.basename(filename)
         except:
             tkinter.messagebox.showerror("Not Found", "music_player couldn't find a file. Please check again.")
-    # if paused was initialized, unpause music
-    else:
-        mixer.music.unpause()
+
 
 # stop button = stop image
 def stop_music():
     mixer.music.stop()
     statusBar["text"] = "Playback Stopped"
 
+paused = False
+
 def pause_music():
     global paused
-    paused = TRUE
+    paused = True
     mixer.music.pause()
     statusBar["text"] = "Playback Paused"
 
