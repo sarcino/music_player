@@ -12,7 +12,7 @@ In progress
 
 ## Credit
 
-### Flaticon icons
+### Icon
 * App icon created from [Pixabay image](https://pixabay.com/photos/background-retro-disk-vinyl-old-2882485/)
 
 ### Flaticon icons
