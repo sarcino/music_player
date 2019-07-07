@@ -2,7 +2,7 @@
 
 Music player which will also play audios from YouTube and track music through Last.fm scrobbling.
 
-Still in progress
+In progress
 
 ## Built With
 
