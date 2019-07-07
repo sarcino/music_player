@@ -7,7 +7,7 @@ In progress
 ## Built With
 
 * [Python](https://www.python.org)
-* [Graphical User Interface with Tk](https://docs.python.org/2/library/tk.html)
+* [tkinter module](https://docs.python.org/2/library/tkinter.html#module-Tkinter)
 * [Pygame](https://www.pygame.org/)
 
 ## Credit
