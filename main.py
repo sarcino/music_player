@@ -72,29 +72,30 @@ def show_details():
     
     if file_data[1] == ".mp3":
         audio = MP3(filename)
-        total_length = audio.info.length
-        
-        # bitrate
-        bitrate_info = audio.info.bitrate
-        bitrate_info = round(bitrate_info / 1000)
+        total_length = audio.info.length          
 
     elif file_data[1] == ".flac":
         audio = FLAC(filename)
-        total_length = audio.info.length        
+        total_length = audio.info.length         
         
     else:
         # loading the sound and store it into variable
         a = mixer.Sound(filename)
         # get the length of stored sound in seconds
         total_length = a.get_length()
+        
+       
+
     # take totallength and calculating remainder
     mins, secs = divmod(total_length, 60)
     # rounding
     mins = round(mins)
     secs = round(secs)
     # showing minutes and seconds in 2 digits format
+    global timeformat
     timeformat = "{:02d}:{:02d}".format(mins, secs)
     lenghtlabel["text"] = "Total lenght: " + timeformat
+    
 
 # play button = play image
 def play_music():
@@ -103,15 +104,15 @@ def play_music():
     # if paused button is true, unpause this
     if paused:
         mixer.music.unpause()
-        statusBar["text"] = "Music Resumed. Playing " + os.path.basename(filename)
+        statusBar["text"] = "playback resumed. " + os.path.basename(filename) + " | " + timeformat
         # paused button is false again
         paused = False         
     else:
         try:
             mixer.music.load(filename)
-            mixer.music.play()
-            statusBar["text"] = "Playing " + os.path.basename(filename)
             show_details()
+            mixer.music.play()
+            statusBar["text"] = os.path.basename(filename) + " | " + timeformat
         except:
             tkinter.messagebox.showerror("Not Found", "music_player couldn't find a file. Please check again.")
     
