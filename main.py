@@ -8,6 +8,10 @@ from tkinter import filedialog
 from tkinter import ttk
 from pygame import mixer
 
+import mutagen
+from mutagen.mp3 import MP3
+from mutagen.flac import FLAC
+
 
 
 # creating new window
@@ -57,19 +61,40 @@ root.iconbitmap(r"images/icon.ico")
 lenghtlabel = Label(root, text = "")
 lenghtlabel.pack(pady=10)
 
+# showing bitrate
+bitratelabel = Label(root, text = "")
+bitratelabel.pack(pady=10)
+
+
 def show_details():   
-    # loading the sound and store it into variable
-    a = mixer.Sound(filename)
-    # get the length of stored sound in seconds
-    totallength = a.get_length()
+    # spliting name of the file from extension
+    file_data = os.path.splitext(filename)
+    
+    if file_data[1] == ".mp3":
+        audio = MP3(filename)
+        total_length = audio.info.length
+        
+        # bitrate
+        bitrate_info = audio.info.bitrate
+        bitrate_info = round(bitrate_info / 1000)
+
+    elif file_data[1] == ".flac":
+        audio = FLAC(filename)
+        total_length = audio.info.length        
+        
+    else:
+        # loading the sound and store it into variable
+        a = mixer.Sound(filename)
+        # get the length of stored sound in seconds
+        total_length = a.get_length()
     # take totallength and calculating remainder
-    mins, secs = divmod(totallength, 60)
+    mins, secs = divmod(total_length, 60)
     # rounding
     mins = round(mins)
     secs = round(secs)
     # showing minutes and seconds in 2 digits format
     timeformat = "{:02d}:{:02d}".format(mins, secs)
-    lenghtlabel['text'] = "Total lenght: " + timeformat
+    lenghtlabel["text"] = "Total lenght: " + timeformat
 
 # play button = play image
 def play_music():
