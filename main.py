@@ -59,12 +59,10 @@ root.iconbitmap(r"images/icon.ico")
 
 # showing total length of song which is playing right now
 lenghtlabel = Label(root, text = "")
-lenghtlabel.pack(pady=10)
+lenghtlabel.pack(pady=5)
 
-# showing bitrate
-bitratelabel = Label(root, text = "")
-bitratelabel.pack(pady=10)
-
+currenttimelabel = Label(root, text = "Current time: --:--")
+currenttimelabel.pack(pady=5)
 
 def show_details():   
     # spliting name of the file from extension
@@ -72,19 +70,27 @@ def show_details():
     
     if file_data[1] == ".mp3":
         audio = MP3(filename)
-        total_length = audio.info.length          
+        total_length = audio.info.length
+        
+        global bitrate
+        
+        bitrate = audio.info.bitrate   
+        bitrate = round(bitrate / 1000)
+        print(bitrate)
 
     elif file_data[1] == ".flac":
         audio = FLAC(filename)
-        total_length = audio.info.length         
+        total_length = audio.info.length   
+
+        bitrate = audio.info.bitrate   
+        bitrate = round(bitrate / 1000)
+        print(bitrate)      
         
     else:
         # loading the sound and store it into variable
         a = mixer.Sound(filename)
         # get the length of stored sound in seconds
         total_length = a.get_length()
-        
-       
 
     # take totallength and calculating remainder
     mins, secs = divmod(total_length, 60)
@@ -95,7 +101,11 @@ def show_details():
     global timeformat
     timeformat = "{:02d}:{:02d}".format(mins, secs)
     lenghtlabel["text"] = "Total lenght: " + timeformat
-    
+
+
+def start_count(t):
+    pass
+
 
 # play button = play image
 def play_music():
