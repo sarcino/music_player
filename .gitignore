@@ -92,7 +92,8 @@ vscode/
 .vscode/extensions.json
 
 music.mp3
-
+example.wav
+example-ogg.ogg
 
 # mypy
 .mypy_cache/
