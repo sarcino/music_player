@@ -9,6 +9,7 @@ In progress
 * [Python](https://www.python.org)
 * [tkinter module](https://docs.python.org/2/library/tkinter.html#module-Tkinter)
 * [Pygame](https://www.pygame.org/)
+* [Mutagen Python multimedia tagging library](https://mutagen.readthedocs.io/)
 
 ## Credit
 
