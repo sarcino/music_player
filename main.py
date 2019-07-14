@@ -1,8 +1,14 @@
 import os
-from tkinter import *
-from pygame import mixer
+import threading
+import time
 import tkinter.messagebox
+from tkinter import *
 from tkinter import filedialog
+
+from tkinter import ttk
+from pygame import mixer
+
+
 
 # creating new window
 root = Tk()
@@ -47,9 +53,23 @@ root.title("sarcino music_player")
 # icon, r = raw string
 root.iconbitmap(r"images/icon.ico")
 
-# Label widget. Every widget needs to be packed
-text = Label(root, text = "Let the music play!")
-text.pack(pady=10)
+# showing total length of song which is playing right now
+lenghtlabel = Label(root, text = "")
+lenghtlabel.pack(pady=10)
+
+def show_details():   
+    # loading the sound and store it into variable
+    a = mixer.Sound(filename)
+    # get the length of stored sound in seconds
+    totallength = a.get_length()
+    # take totallength and calculating remainder
+    mins, secs = divmod(totallength, 60)
+    # rounding
+    mins = round(mins)
+    secs = round(secs)
+    # showing minutes and seconds in 2 digits format
+    timeformat = "{:02d}:{:02d}".format(mins, secs)
+    lenghtlabel['text'] = "Total lenght: " + timeformat
 
 # play button = play image
 def play_music():
@@ -60,15 +80,16 @@ def play_music():
         mixer.music.unpause()
         statusBar["text"] = "Music Resumed. Playing " + os.path.basename(filename)
         # paused button is false again
-        paused = False
+        paused = False         
     else:
         try:
             mixer.music.load(filename)
             mixer.music.play()
             statusBar["text"] = "Playing " + os.path.basename(filename)
+            show_details()
         except:
             tkinter.messagebox.showerror("Not Found", "music_player couldn't find a file. Please check again.")
-
+    
 
 # stop button = stop image
 def stop_music():
