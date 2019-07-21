@@ -143,16 +143,16 @@ def play_music():
     global paused
     # if paused button is true, unpause this
     if paused:
+        # playback resumed
         mixer.music.unpause()
-        statusBar["text"] = "playback resumed. " + \
-            os.path.basename(filename) + " | " + "duration: " + timeformat
+        statusBar["text"] = os.path.basename(filename) + " | " + "duration: " + timeformat
         # paused button is false again
         paused = False
     else:
         try:            
-            mixer.music.load(filename)            
-            mixer.music.play()
-            show_details()
+            mixer.music.load(filename)                    
+            mixer.music.play()  
+            show_details()            
             statusBar["text"] = os.path.basename(
                 filename) + " | " + "duration: " + timeformat
 
@@ -174,7 +174,7 @@ def pause_music():
     global paused
     paused = True
     mixer.music.pause()
-    statusBar["text"] = "Playback Paused"
+    statusBar["text"] = "playback paused"
 
 
 def rewind_music():
