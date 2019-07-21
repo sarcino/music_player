@@ -1,7 +1,6 @@
 import os
 import threading
 import time
-import threading
 import tkinter.messagebox
 from tkinter import *
 from tkinter import filedialog
@@ -27,6 +26,7 @@ root.config(menu=menuBar)
 # creating sub-menu File, using menuBar
 subMenu = Menu(menuBar, tearoff=0)
 
+
 def browse_file():
     # make fileName variable global
     global filename
@@ -39,8 +39,12 @@ subMenu.add_command(label="Open", command=browse_file)
 subMenu.add_command(label="Exit", command=root.destroy)
 
 # About menu - opens new window with information: Title and Copy
+
+
 def about():
-    tkinter.messagebox.showinfo("sarcino music_player", "Created by @sarcino", )
+    tkinter.messagebox.showinfo(
+        "sarcino music_player", "Created by @sarcino", )
+
 
 # creating sub-menu Help, using menuBar
 subMenu = Menu(menuBar, tearoff=0)
@@ -59,34 +63,34 @@ root.title("sarcino music_player")
 root.iconbitmap(r"images/icon.ico")
 
 # showing total length of song which is playing right now
-lenghtlabel = Label(root, text = "")
+lenghtlabel = Label(root, text="")
 lenghtlabel.pack(pady=5)
 
-currenttimelabel = Label(root, text = "")
+currenttimelabel = Label(root, text="")
 currenttimelabel.pack(pady=5)
 
-def show_details():   
+
+def show_details():
     # spliting name of the file from extension
     file_data = os.path.splitext(filename)
-    
+
     if file_data[1] == ".mp3":
         audio = MP3(filename)
         total_length = audio.info.length
-        
+
         global bitrate
 
         bitrate = audio.info.bitrate   
         bitrate = round(bitrate / 1000)
-        print(bitrate)
 
     elif file_data[1] == ".flac":
         audio = FLAC(filename)
-        total_length = audio.info.length   
+        total_length = audio.info.length
 
-        bitrate = audio.info.bitrate   
+        bitrate = audio.info.bitrate
         bitrate = round(bitrate / 1000)
-        print(bitrate)             
-        
+        print(bitrate)
+
     else:
         # loading the sound and store it into variable
         a = mixer.Sound(filename)
@@ -107,10 +111,11 @@ def show_details():
     # THREADING - first argument function, arguments - argument of the function
     t1 = threading.Thread(target=start_count, args=(total_length,))
     # + calling it
-    t1.start
-    
+    t1.start()
+
 # counting current time of playing song
 # t is our total_length
+
 def start_count(t):
     global paused
     current_time = 0
@@ -119,51 +124,58 @@ def start_count(t):
         if paused:
             continue
         else:
-            mins, secs = divmod(current_time, 60)
-            mins = round(mins)
-            secs = round(secs)
+            current_mins, current_secs = divmod(current_time, 60)
+            current_mins = round(current_mins)
+            current_secs = round(current_secs)
 
-            global timeformat_counting
+            global timeformat_current
 
-            timeformat_counting = "{:02d}:{:02d}".format(mins, secs)
-            currenttimelabel['text'] = "Current Time: " + timeformat_counting
+            timeformat_current = "{:02d}:{:02d}".format(current_mins, current_secs)
+            currenttimelabel['text'] = "Current Time: " + timeformat_current
             # sleep for one second and continue += 1 second
             time.sleep(1)
-            current_time += 1
+            current_time = current_time + 1
+
 
 # play button = play image
 def play_music():
-    
+
     global paused
     # if paused button is true, unpause this
     if paused:
         mixer.music.unpause()
-        statusBar["text"] = "playback resumed. " + os.path.basename(filename) + " | " + "duration: " + timeformat
+        statusBar["text"] = "playback resumed. " + \
+            os.path.basename(filename) + " | " + "duration: " + timeformat
         # paused button is false again
-        paused = False         
+        paused = False
     else:
-        try:
-            mixer.music.load(filename)
-            show_details()            
+        try:            
+            mixer.music.load(filename)            
             mixer.music.play()
-            statusBar["text"] = os.path.basename(filename) + " | " + "duration: " + timeformat
-            
+            show_details()
+            statusBar["text"] = os.path.basename(
+                filename) + " | " + "duration: " + timeformat
+
         except:
-            tkinter.messagebox.showerror("Not Found", "music_player couldn't find a file. Please check again.")
-    
+            tkinter.messagebox.showerror(
+                "Not Found", "music_player couldn't find a file. Please check again.")
+
 
 # stop button = stop image
 def stop_music():
     mixer.music.stop()
     statusBar["text"] = "Playback Stopped"
 
+
 paused = False
+
 
 def pause_music():
     global paused
     paused = True
     mixer.music.pause()
     statusBar["text"] = "Playback Paused"
+
 
 def rewind_music():
     play_music()
@@ -175,8 +187,10 @@ def set_vol(val):
     # set_volume function takes value from 0 to 1 only
     mixer.music.set_volume(volume)
 
+
 # by default is not False
 muted = False
+
 
 def mute_music():
     global muted
@@ -188,7 +202,7 @@ def mute_music():
         scale.set(25)
         muted = False
     else:
-        #mute the music
+        # mute the music
         mixer.music.set_volume(0)
         # once I clicked on the volume picture, it changes to the mute picture
         volumeBtn.configure(image=mute)
@@ -234,7 +248,8 @@ volumeBtn = Button(bottomframe, image=volume, command=mute_music)
 volumeBtn.grid(row=0, column=2, padx=3)
 
 # volume control
-scale = Scale(bottomframe, from_=0, to=100, orient=HORIZONTAL, cursor="hand2", command_=set_vol)
+scale = Scale(bottomframe, from_=0, to=100, orient=HORIZONTAL,
+              cursor="hand2", command_=set_vol)
 # default volume value when you open the player
 # show 25
 scale.set(25)
@@ -245,7 +260,8 @@ scale.grid(row=0, column=0, pady=20, padx=20)
 
 
 # anchor = align of text, W is for west, left
-statusBar = Label(root, text="Welcome to music_player", relief=SUNKEN, anchor=W)
+statusBar = Label(root, text="Welcome to music_player",
+                  relief=SUNKEN, anchor=W)
 statusBar.pack(side=BOTTOM, fill=X)
 
 
