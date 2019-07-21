@@ -1,6 +1,7 @@
 import os
 import threading
 import time
+import threading
 import tkinter.messagebox
 from tkinter import *
 from tkinter import filedialog
@@ -61,7 +62,7 @@ root.iconbitmap(r"images/icon.ico")
 lenghtlabel = Label(root, text = "")
 lenghtlabel.pack(pady=5)
 
-currenttimelabel = Label(root, text = "Current time: --:--")
+currenttimelabel = Label(root, text = "")
 currenttimelabel.pack(pady=5)
 
 def show_details():   
@@ -73,7 +74,7 @@ def show_details():
         total_length = audio.info.length
         
         global bitrate
-        
+
         bitrate = audio.info.bitrate   
         bitrate = round(bitrate / 1000)
         print(bitrate)
@@ -84,7 +85,7 @@ def show_details():
 
         bitrate = audio.info.bitrate   
         bitrate = round(bitrate / 1000)
-        print(bitrate)      
+        print(bitrate)             
         
     else:
         # loading the sound and store it into variable
@@ -97,15 +98,38 @@ def show_details():
     # rounding
     mins = round(mins)
     secs = round(secs)
-    # showing minutes and seconds in 2 digits format
+
     global timeformat
+    # showing minutes and seconds in 2 digits format
     timeformat = "{:02d}:{:02d}".format(mins, secs)
     lenghtlabel["text"] = "Total lenght: " + timeformat
 
-
+    # THREADING - first argument function, arguments - argument of the function
+    t1 = threading.Thread(target=start_count, args=(total_length,))
+    # + calling it
+    t1.start
+    
+# counting current time of playing song
+# t is our total_length
 def start_count(t):
-    pass
+    global paused
+    current_time = 0
+    # mixer.music.get_busy() - returns false when we press stop button or music stops playing
+    while current_time <= t and mixer.music.get_busy():
+        if paused:
+            continue
+        else:
+            mins, secs = divmod(current_time, 60)
+            mins = round(mins)
+            secs = round(secs)
 
+            global timeformat_counting
+
+            timeformat_counting = "{:02d}:{:02d}".format(mins, secs)
+            currenttimelabel['text'] = "Current Time: " + timeformat_counting
+            # sleep for one second and continue += 1 second
+            time.sleep(1)
+            current_time += 1
 
 # play button = play image
 def play_music():
@@ -114,15 +138,16 @@ def play_music():
     # if paused button is true, unpause this
     if paused:
         mixer.music.unpause()
-        statusBar["text"] = "playback resumed. " + os.path.basename(filename) + " | " + timeformat
+        statusBar["text"] = "playback resumed. " + os.path.basename(filename) + " | " + "duration: " + timeformat
         # paused button is false again
         paused = False         
     else:
         try:
             mixer.music.load(filename)
-            show_details()
+            show_details()            
             mixer.music.play()
-            statusBar["text"] = os.path.basename(filename) + " | " + timeformat
+            statusBar["text"] = os.path.basename(filename) + " | " + "duration: " + timeformat
+            
         except:
             tkinter.messagebox.showerror("Not Found", "music_player couldn't find a file. Please check again.")
     
