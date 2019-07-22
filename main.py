@@ -17,6 +17,7 @@ from mutagen.flac import FLAC
 # creating new window
 root = Tk()
 
+
 # creating menu bar itself
 menuBar = Menu(root)
 
