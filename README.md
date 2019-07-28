@@ -17,16 +17,11 @@ Thanks to:
 
 * Attreya Bhatt for his [Build with Python YouTube Channel](https://www.youtube.com/channel/UCirPbvoHzD78Lnyll6YYUpg/)
 
-### Icon
-* App icon created from [Pixabay image](https://pixabay.com/photos/background-retro-disk-vinyl-old-2882485/)
-
-### Flaticon icons
-
-* Mute icon made by [Google](https://www.flaticon.com/authors/google)
-* Pause icon made by [Google](https://www.flaticon.com/authors/google)
-* Play icon made by [Yannick](https://www.flaticon.com/authors/yannick)
-* Rewind icon made by [Smashicons](https://www.flaticon.com/authors/smashicons)
-* Speaker icon made by [Google](https://www.flaticon.com/authors/google)
+### Icons
+* App favicon created from [Pixabay image](https://pixabay.com/photos/background-retro-disk-vinyl-old-2882485/)
+* Mute, Pause, Speaker, Add and Delete Icons made by [Google](https://www.flaticon.com/authors/google), CC BY 3.0
+* Play icon made by [Yannick](https://www.flaticon.com/authors/yannick), CC BY 3.0
+* Rewind icon made by [Smashicons](https://www.flaticon.com/authors/smashicons), [Flaticon Basic License](https://file000.flaticon.com/downloads/license/license.pdf)
 
 
 
