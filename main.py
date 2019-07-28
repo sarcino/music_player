@@ -26,6 +26,8 @@ root.config(menu=menuBar)
 # creating sub-menu File, using menuBar
 subMenu = Menu(menuBar, tearoff=0)
 
+# it contains full path + filename
+playlist = []
 
 def browse_file():
     # make fileName variable global
@@ -35,13 +37,18 @@ def browse_file():
     add_to_playlist(os.path.basename(
                 filename))
 
+
 # clicking on Add Button function
+# f is name of song without path
 def add_to_playlist(f):
     # appearing list of songs in root window    
     index = 0
-    playlistbox.insert(index,f)    
+    playlistbox.insert(index, f)
+    # inserting songs into list playlist
+    playlist.insert(index, filename) 
     # increasing index everytime
     index += 1
+
 
 
 menuBar.add_cascade(label="File", menu=subMenu)
@@ -134,6 +141,7 @@ def start_count(t):
     while current_time <= t and mixer.music.get_busy():
         if paused:
             continue
+
         else:
             current_mins, current_secs = divmod(current_time, 60)
             current_mins = round(current_mins)
@@ -163,11 +171,21 @@ def play_music():
         paused = False
     else:
         try:
-            mixer.music.load(filename)
+            # when switching song, stop music and wait for one second 
+            stop_music()
+            time.sleep(1)
+
+            # the result is a song from the list which was selected
+            selected_song = playlistbox.curselection()
+            selected_song = int(selected_song[0])
+            # saving the path of the selected song into variable
+            play_it = playlist[selected_song]
+
+            mixer.music.load(play_it)
             mixer.music.play()
             show_details()
             statusBar["text"] = os.path.basename(
-                filename) + " | " + "duration: " + timeformat
+               play_it) + " | " + "duration: " + timeformat
 
         except:
             tkinter.messagebox.showerror(
@@ -177,7 +195,7 @@ def play_music():
 # stop button = stop image
 def stop_music():
     mixer.music.stop()
-    statusBar["text"] = "Playback Stopped"
+    statusBar["text"] = "playback stopped"
 
 
 paused = False

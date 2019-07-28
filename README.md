@@ -7,7 +7,7 @@ In progress
 ## Built With
 
 * [Python](https://www.python.org)
-* [tkinter module](https://docs.python.org/3.7/library/tkinter.html#module-Tkinter)
+* [tkinter package](https://docs.python.org/3.7/library/tkinter.html#module-Tkinter)
 * [Pygame](https://www.pygame.org/)
 * [Mutagen Python multimedia tagging library](https://mutagen.readthedocs.io/)
 
