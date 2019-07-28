@@ -8,7 +8,7 @@ In progress
 
 * [Python](https://www.python.org)
 * [tkinter package](https://docs.python.org/3.6/library/tkinter.html#module-Tkinter)
-* [Pygame](https://www.pygame.org/)
+* [pygame](https://www.pygame.org/)
 * [Mutagen multimedia tagging library](https://mutagen.readthedocs.io/)
 
 ## Dependencies
