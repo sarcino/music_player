@@ -13,6 +13,10 @@ from mutagen.mp3 import MP3
 from mutagen.flac import FLAC
 
 
+
+
+
+
 # creating new window
 root = Tk()
 
@@ -60,7 +64,7 @@ subMenu.add_command(label="Exit", command=root.destroy)
 
 def about():
     tkinter.messagebox.showinfo(
-        "sarcino music_player", "Created by @sarcino", )
+        "sarcino music_player", "created by @sarcino", )
 
 
 # creating sub-menu Help, using menuBar
@@ -173,7 +177,7 @@ def play_music():
         try:
             # when switching song, stop music and wait for one second 
             stop_music()
-            time.sleep(1)
+            time.sleep(1)            
 
             # the result is a song from the list which was selected
             selected_song = playlistbox.curselection()
@@ -254,11 +258,13 @@ playlistbox = Listbox(root)
 playlistbox.pack(pady=10)
 
 # add to playlist button
-addItemBtn = Button(root, text="add", command=browse_file)
+add = PhotoImage(file="images/add.png")
+addItemBtn = Button(root, image=add, command=browse_file)
 addItemBtn.pack(padx=3, pady=5)
 
 # delete from playlist button
-delItemBtn = Button(root, text="delete")
+delete = PhotoImage(file="images/delete.png")
+delItemBtn = Button(root, image=delete)
 delItemBtn.pack(padx=3, pady=5)
 
 # play image - show in the default window
