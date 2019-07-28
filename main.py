@@ -35,11 +35,13 @@ def browse_file():
     add_to_playlist(os.path.basename(
                 filename))
 
-
+# clicking on Add Button function
 def add_to_playlist(f):
     # appearing list of songs in root window    
     index = 0
     playlistbox.insert(index,f)    
+    # increasing index everytime
+    index += 1
 
 
 menuBar.add_cascade(label="File", menu=subMenu)
