@@ -13,7 +13,6 @@ from mutagen.mp3 import MP3
 from mutagen.flac import FLAC
 
 
-
 # creating new window
 root = Tk()
 
@@ -33,6 +32,14 @@ def browse_file():
     global filename
     filename = filedialog.askopenfilename()
     statusBar["text"] = filename
+    add_to_playlist(os.path.basename(
+                filename))
+
+
+def add_to_playlist(f):
+    # appearing list of songs in root window    
+    index = 0
+    playlistbox.insert(index,f)    
 
 
 menuBar.add_cascade(label="File", menu=subMenu)
@@ -81,7 +88,7 @@ def show_details():
 
         global bitrate
 
-        bitrate = audio.info.bitrate   
+        bitrate = audio.info.bitrate
         bitrate = round(bitrate / 1000)
 
     elif file_data[1] == ".flac":
@@ -117,6 +124,7 @@ def show_details():
 # counting current time of playing song
 # t is our total_length
 
+
 def start_count(t):
     global paused
     current_time = 0
@@ -131,7 +139,8 @@ def start_count(t):
 
             global timeformat_current
 
-            timeformat_current = "{:02d}:{:02d}".format(current_mins, current_secs)
+            timeformat_current = "{:02d}:{:02d}".format(
+                current_mins, current_secs)
             currenttimelabel['text'] = "Current Time: " + timeformat_current
             # sleep for one second and continue += 1 second
             time.sleep(1)
@@ -146,14 +155,15 @@ def play_music():
     if paused:
         # playback resumed
         mixer.music.unpause()
-        statusBar["text"] = os.path.basename(filename) + " | " + "duration: " + timeformat
+        statusBar["text"] = os.path.basename(
+            filename) + " | " + "duration: " + timeformat
         # paused button is false again
         paused = False
     else:
-        try:            
-            mixer.music.load(filename)                    
-            mixer.music.play()  
-            show_details()            
+        try:
+            mixer.music.load(filename)
+            mixer.music.play()
+            show_details()
             statusBar["text"] = os.path.basename(
                 filename) + " | " + "duration: " + timeformat
 
@@ -212,7 +222,6 @@ def mute_music():
         muted = True
 
 
-
 # creating frame for buttons - to be able to align them in one row
 middleframe = Frame(root)
 middleframe.pack(pady=10, padx=30)
@@ -220,6 +229,17 @@ middleframe.pack(pady=10, padx=30)
 bottomframe = Frame(root)
 bottomframe.pack(pady=10, padx=30)
 
+# playlist
+playlistbox = Listbox(root)
+playlistbox.pack(pady=10)
+
+# add to playlist button
+addItemBtn = Button(root, text="add", command=browse_file)
+addItemBtn.pack(padx=3, pady=5)
+
+# delete from playlist button
+delItemBtn = Button(root, text="delete")
+delItemBtn.pack(padx=3, pady=5)
 
 # play image - show in the default window
 play = PhotoImage(file="images/play.png")
@@ -257,7 +277,6 @@ scale.set(25)
 # play 25 volume value
 mixer.music.set_volume(0.25)
 scale.grid(row=0, column=0, pady=20, padx=20)
-
 
 
 # anchor = align of text, W is for west, left
