@@ -245,6 +245,16 @@ def mute_music():
         scale.set(0)
         muted = True
 
+# function for deleting song from playlist
+def del_song():
+    # a song from the list which was selected
+    selected_song = playlistbox.curselection()
+    selected_song = int(selected_song[0])   
+    # delete selected_song from playlistbox
+    playlistbox.delete(selected_song)
+    # remove an item from playlist
+    playlist.pop(selected_song)
+
 
 # creating frame for buttons - to be able to align them in one row
 middleframe = Frame(root)
@@ -264,7 +274,7 @@ addItemBtn.pack(padx=3, pady=5)
 
 # delete from playlist button
 delete = PhotoImage(file="images/delete.png")
-delItemBtn = Button(root, image=delete)
+delItemBtn = Button(root, image=delete, command=del_song)
 delItemBtn.pack(padx=3, pady=5)
 
 # play image - show in the default window
