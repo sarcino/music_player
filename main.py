@@ -84,10 +84,10 @@ root.title("sarcino music_player")
 root.iconbitmap(r"images/icon.ico")
 
 # showing total length of song which is playing right now
-lenghtlabel = Label(root, text="")
-lenghtlabel.pack(pady=5)
+# lenghtlabel = Label(root, text="")
+# lenghtlabel.pack(pady=5)
 
-currenttimelabel = Label(root, text="")
+currenttimelabel = ttk.Label(root, text="")
 currenttimelabel.pack(pady=5)
 
 
@@ -127,7 +127,7 @@ def show_details():
     global timeformat
     # showing minutes and seconds in 2 digits format
     timeformat = "{:02d}:{:02d}".format(mins, secs)
-    lenghtlabel["text"] = "Total lenght: " + timeformat
+    #lenghtlabel["text"] = "Total lenght: " + timeformat
 
     # THREADING - first argument function, arguments - argument of the function
     t1 = threading.Thread(target=start_count, args=(total_length,))
@@ -155,7 +155,7 @@ def start_count(t):
 
             timeformat_current = "{:02d}:{:02d}".format(
                 current_mins, current_secs)
-            currenttimelabel['text'] = "Current Time: " + timeformat_current
+            currenttimelabel['text'] = "current time: " + timeformat_current
             # sleep for one second and continue += 1 second
             time.sleep(1)
             current_time = current_time + 1
@@ -218,7 +218,7 @@ def rewind_music():
 
 def set_vol(val):
     # value is string, must be converted into integer
-    volume = int(val) / 100
+    volume = float(val) / 100
     # set_volume function takes value from 0 to 1 only
     mixer.music.set_volume(volume)
 
@@ -269,43 +269,43 @@ playlistbox.pack(pady=10)
 
 # add to playlist button
 add = PhotoImage(file="images/add.png")
-addItemBtn = Button(root, image=add, command=browse_file)
+addItemBtn = ttk.Button(root, image=add, command=browse_file)
 addItemBtn.pack(padx=3, pady=5)
 
 # delete from playlist button
 delete = PhotoImage(file="images/delete.png")
-delItemBtn = Button(root, image=delete, command=del_song)
+delItemBtn = ttk.Button(root, image=delete, command=del_song)
 delItemBtn.pack(padx=3, pady=5)
 
 # play image - show in the default window
 play = PhotoImage(file="images/play.png")
 # play button is localized in middleframe, image variable play, function play music
-playBtn = Button(middleframe, image=play, command=play_music)
+playBtn = ttk.Button(middleframe, image=play, command=play_music)
 playBtn.grid(row=0, column=0, padx=3)
 
 # stop image - show in the default window
 stop = PhotoImage(file="images/stop.png")
-stopBtn = Button(middleframe, image=stop, command=stop_music)
+stopBtn = ttk.Button(middleframe, image=stop, command=stop_music)
 stopBtn.grid(row=0, column=1, padx=3)
 
 # pause image
 pause = PhotoImage(file="images/pause.png")
-pauseBtn = Button(middleframe, image=pause, command=pause_music)
+pauseBtn = ttk.Button(middleframe, image=pause, command=pause_music)
 pauseBtn.grid(row=0, column=2, padx=3)
 
 # rewind button
 rewind = PhotoImage(file="images/rewind.png")
-rewindBtn = Button(middleframe, image=rewind, command=rewind_music)
+rewindBtn = ttk.Button(middleframe, image=rewind, command=rewind_music)
 rewindBtn.grid(row=0, column=3, padx=3)
 
 # mute/ unmute button
 mute = PhotoImage(file="images/mute.png")
 volume = PhotoImage(file="images/volume.png")
-volumeBtn = Button(bottomframe, image=volume, command=mute_music)
+volumeBtn = ttk.Button(bottomframe, image=volume, command=mute_music)
 volumeBtn.grid(row=0, column=2, padx=3)
 
 # volume control
-scale = Scale(bottomframe, from_=0, to=100, orient=HORIZONTAL,
+scale = ttk.Scale(bottomframe, from_=0, to=100, orient=HORIZONTAL,
               cursor="hand2", command_=set_vol)
 # default volume value when you open the player
 # show 25
