@@ -76,7 +76,7 @@ subMenu.add_command(label="About", command=about)
 mixer.init()
 
 # size of the window after opening
-# root.geometry("500x300")
+root.geometry("600x350")
 # title of the window
 root.title("sarcino music_player")
 # icon, r = raw string
@@ -256,32 +256,37 @@ def del_song():
 
 
 # creating frame for buttons - to be able to align them in one row
+# used for play, stop, pause, rewind buttons, mute, volume control
 middleframe = Frame(root)
-middleframe.pack(pady=10, padx=30)
+middleframe.pack(anchor="w", pady=5, padx=5)
 
 bottomframe = Frame(root)
-bottomframe.pack(pady=10, padx=30)
+bottomframe.pack(anchor="e", pady=10, padx=5)
 
+# double click on name of the song = play music
 def left_click(event):
     play_music()
 
 # playlist - background of selected song, height in lines, width in characters
-playlistbox = Listbox(root, bd=1, selectbackground="#ff782e", height=10, width=70)
+#playlistbox = Listbox(root, bd=1, height=10, width=70)
+playlistbox = Listbox(root, bd=1, height=10)
 # bind double left clicks
 playlistbox.bind('<Double-1>', left_click)
-playlistbox.pack(pady=10)
+# playlistbox.pack(pady=10)
+playlistbox.pack()
+playlistbox.place(bordermode=INSIDE, y=170, relwidth=1.0)
 
 
 
 # add to playlist button
 add = PhotoImage(file="images/add.png")
-addItemBtn = ttk.Button(root, image=add, command=browse_file)
-addItemBtn.pack(padx=3, pady=5)
+addItemBtn = ttk.Button(bottomframe, image=add, command=browse_file)
+addItemBtn.grid(row=0, column=0, padx=3, pady=5)
 
 # delete from playlist button
 delete = PhotoImage(file="images/delete.png")
-delItemBtn = ttk.Button(root, image=delete, command=del_song)
-delItemBtn.pack(padx=3, pady=5)
+delItemBtn = ttk.Button(bottomframe, image=delete, command=del_song)
+delItemBtn.grid(row=0, column=1, padx=3, pady=5)
 
 # play image - show in the default window
 play = PhotoImage(file="images/play.png")
@@ -304,21 +309,24 @@ rewind = PhotoImage(file="images/rewind.png")
 rewindBtn = ttk.Button(middleframe, image=rewind, command=rewind_music)
 rewindBtn.grid(row=0, column=3, padx=3)
 
-# mute/ unmute button
-mute = PhotoImage(file="images/mute.png")
-volume = PhotoImage(file="images/volume.png")
-volumeBtn = ttk.Button(bottomframe, image=volume, command=mute_music)
-volumeBtn.grid(row=0, column=2, padx=3)
 
 # volume control
-scale = ttk.Scale(bottomframe, from_=0, to=100, orient=HORIZONTAL,
+scale = ttk.Scale(middleframe, from_=0, to=100, orient=HORIZONTAL,
               cursor="hand2", command_=set_vol)
 # default volume value when you open the player
 # show 25
 scale.set(25)
 # play 25 volume value
 mixer.music.set_volume(0.25)
-scale.grid(row=0, column=0, pady=20, padx=20)
+scale.grid(row=0, column=4, pady=20, padx=20)
+
+# mute/ unmute button
+mute = PhotoImage(file="images/mute.png")
+volume = PhotoImage(file="images/volume.png")
+volumeBtn = ttk.Button(middleframe, image=volume, command=mute_music)
+volumeBtn.grid(row=0, column=5, padx=3)
+
+
 
 
 # anchor = align of text, W is for west, left
