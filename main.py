@@ -33,8 +33,7 @@ subMenu = Menu(menuBar, tearoff=0)
 # it contains full path + filename
 playlist = []
 
-def browse_file():
-    # make fileName variable global
+def browse_file():    
     global filename
     filename = filedialog.askopenfilename()
     statusBar["text"] = filename
@@ -263,9 +262,16 @@ middleframe.pack(pady=10, padx=30)
 bottomframe = Frame(root)
 bottomframe.pack(pady=10, padx=30)
 
-# playlist
-playlistbox = Listbox(root)
+def left_click(event):
+    play_music()
+
+# playlist - background of selected song, height in lines, width in characters
+playlistbox = Listbox(root, bd=1, selectbackground="#ff782e", height=10, width=70)
+# bind double left clicks
+playlistbox.bind('<Double-1>', left_click)
 playlistbox.pack(pady=10)
+
+
 
 # add to playlist button
 add = PhotoImage(file="images/add.png")
