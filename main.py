@@ -274,7 +274,8 @@ playlistbox = Listbox(root, bd=1, height=10)
 playlistbox.bind('<Double-1>', left_click)
 # playlistbox.pack(pady=10)
 playlistbox.pack()
-playlistbox.place(bordermode=INSIDE, y=170, relwidth=1.0)
+# relative width and relative height = 100 % of the parrent widget => 100% width and sticks to the bottom 
+playlistbox.place(bordermode=INSIDE, y=170, relwidth=1.0, relheight=1.0)
 
 
 
