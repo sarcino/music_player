@@ -11,7 +11,7 @@ from pygame import mixer
 import mutagen
 from mutagen.mp3 import MP3
 from mutagen.flac import FLAC
-
+from mutagen.id3 import ID3
 
 
 
@@ -93,13 +93,12 @@ currenttimelabel.pack(pady=5)
 def show_details():
     # spliting name of the file from extension
     file_data = os.path.splitext(filename)
+    global bitrate
 
     if file_data[1] == ".mp3":
         audio = MP3(filename)
-        total_length = audio.info.length
-
-        global bitrate
-
+        total_length = audio.info.length        
+        
         bitrate = audio.info.bitrate
         bitrate = round(bitrate / 1000)
 
@@ -109,7 +108,6 @@ def show_details():
 
         bitrate = audio.info.bitrate
         bitrate = round(bitrate / 1000)
-        print(bitrate)
 
     else:
         # loading the sound and store it into variable
@@ -188,7 +186,7 @@ def play_music():
             mixer.music.play()
             show_details()
             statusBar["text"] = os.path.basename(
-               play_it) + " | " + "duration: " + timeformat
+               play_it) + " | " + "duration: " + timeformat + " | " + "bitrate: " + str(bitrate) + " kbps"
 
         except:
             tkinter.messagebox.showerror(
@@ -266,6 +264,7 @@ bottomframe.pack(anchor="e", pady=10, padx=5)
 # double click on name of the song = play music
 def left_click(event):
     play_music()
+
 
 # playlist - background of selected song, height in lines, width in characters
 #playlistbox = Listbox(root, bd=1, height=10, width=70)
