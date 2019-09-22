@@ -115,6 +115,8 @@ def show_details():
         # get the length of stored sound in seconds
         total_length = a.get_length()
 
+        bitrate = "-"
+        
     # take totallength and calculating remainder
     mins, secs = divmod(total_length, 60)
     # rounding
@@ -167,7 +169,7 @@ def play_music():
         # playback resumed
         mixer.music.unpause()
         statusBar["text"] = os.path.basename(
-            filename) + " | " + "duration: " + timeformat
+            filename) + " | " + "duration: " + timeformat + " | " + "bitrate: " + str(bitrate) + " kbps"
         # paused button is false again
         paused = False
     else:
@@ -183,8 +185,9 @@ def play_music():
             play_it = playlist[selected_song]
 
             mixer.music.load(play_it)
-            mixer.music.play()
             show_details()
+            mixer.music.play()
+            
             statusBar["text"] = os.path.basename(
                play_it) + " | " + "duration: " + timeformat + " | " + "bitrate: " + str(bitrate) + " kbps"
 
