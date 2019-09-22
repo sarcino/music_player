@@ -11,6 +11,7 @@ In progress
 * [pygame](https://www.pygame.org/) and [pygame mixer](https://www.pygame.org/docs/ref/mixer.html)
 * [Mutagen multimedia tagging library](https://mutagen.readthedocs.io/)
 * [ttk package](https://docs.python.org/3.6/library/tkinter.ttk.html)
+* [cx_Freeze](https://anthony-tuininga.github.io/cx_Freeze/)
 
 ## Dependencies
 
@@ -18,6 +19,7 @@ In progress
 * pygame 1.9.6
 * Mutagen 1.42.0
 * tkinter
+* cx_Freeze 6.0
 
 ## Credit
 
