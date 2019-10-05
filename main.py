@@ -1,6 +1,8 @@
 import os
 import threading
 import time
+import pygame
+
 import tkinter.messagebox
 from tkinter import *
 from tkinter import filedialog
@@ -140,6 +142,7 @@ def show_details():
 def start_count(t):
     global paused
     current_time = 0
+
     # mixer.music.get_busy() - returns false when we press stop button or music stops playing
     while current_time <= t and mixer.music.get_busy():
         if paused:
