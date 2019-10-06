@@ -82,7 +82,7 @@ root.geometry("600x350")
 # title of the window
 root.title("sarcino music_player")
 # icon, r = raw string
-root.iconbitmap(r"images/icon.ico")
+root.iconbitmap(r"images\icon.ico")
 
 # showing total length of song which is playing right now
 # lenghtlabel = Label(root, text="")
