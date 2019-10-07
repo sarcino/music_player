@@ -11,7 +11,7 @@ In progress
 * [pygame](https://www.pygame.org/) and [pygame mixer](https://www.pygame.org/docs/ref/mixer.html)
 * [Mutagen multimedia tagging library](https://mutagen.readthedocs.io/)
 * [ttk package](https://docs.python.org/3.6/library/tkinter.ttk.html)
-* [py2exe 0.9.2.2](https://pypi.org/project/py2exe/)
+* [py2exe](https://pypi.org/project/py2exe/)
 
 ## Dependencies
 
@@ -20,6 +20,7 @@ In progress
 * Mutagen 1.42.0
 * tkinter
 * cx_Freeze 6.0
+* py2exe 0.9.2.2
 
 ## Credit
 
