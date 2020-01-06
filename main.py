@@ -57,7 +57,7 @@ def add_to_playlist(f):
 
 
 menuBar.add_cascade(label="File", menu=subMenu)
-subMenu.add_command(label="Open", command=browse_file)
+subMenu.add_command(label="Open             CTRL+O", command=browse_file)
 subMenu.add_command(label="Exit", command=root.destroy)
 
 # About menu - opens new window with information: Title and Copy
@@ -137,7 +137,6 @@ def show_details():
 
 # counting current time of playing song
 # t is our total_length
-
 
 def start_count(t):
     global paused
@@ -250,6 +249,7 @@ def mute_music():
 
 # function for deleting song from playlist
 def del_song():
+    global selected_song
     # a song from the list which was selected
     selected_song = playlistbox.curselection()
     selected_song = int(selected_song[0])   
@@ -265,7 +265,7 @@ middleframe = Frame(root)
 middleframe.pack(anchor="w", pady=5, padx=5)
 
 bottomframe = Frame(root)
-bottomframe.pack(anchor="e", pady=10, padx=5)
+bottomframe.pack(anchor="e", pady=5, padx=5)
 
 # double click on name of the song = play music
 def left_click(event):
@@ -287,12 +287,12 @@ playlistbox.place(bordermode=INSIDE, y=170, relwidth=1.0, relheight=1.0)
 # add to playlist button
 add = PhotoImage(file="images/add.png")
 addItemBtn = ttk.Button(bottomframe, image=add, command=browse_file)
-addItemBtn.grid(row=0, column=0, padx=3, pady=5)
+addItemBtn.grid(row=0, column=0, padx=3, pady=0)
 
 # delete from playlist button
 delete = PhotoImage(file="images/delete.png")
 delItemBtn = ttk.Button(bottomframe, image=delete, command=del_song)
-delItemBtn.grid(row=0, column=1, padx=3, pady=5)
+delItemBtn.grid(row=0, column=1, padx=3, pady=0)
 
 # play image - show in the default window
 play = PhotoImage(file="images/play.png")
@@ -340,6 +340,8 @@ statusBar = Label(root, text="Welcome to music_player",
                   relief=SUNKEN, anchor=W)
 statusBar.pack(side=BOTTOM, fill=X)
 
+# keyboard events
+root.bind("<Control-o>", lambda e: browse_file())
 
 # start the program
 root.mainloop()

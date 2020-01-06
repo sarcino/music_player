@@ -2,6 +2,8 @@
 
 Desktop application, music player which will optionally play audios from YouTube and track music through Last.fm scrobbling
 
+Installer of music_player 1.0 can be found here: [https://www.dropbox.com/s/ssw1fplqzls5m9e/music_player_v1.0.exe?dl=0](https://www.dropbox.com/s/ssw1fplqzls5m9e/music_player_v1.0.exe?dl=0)
+
 In progress
 
 ## Built With
@@ -12,6 +14,7 @@ In progress
 * [Mutagen multimedia tagging library](https://mutagen.readthedocs.io/)
 * [ttk package](https://docs.python.org/3.6/library/tkinter.ttk.html)
 * [py2exe](https://pypi.org/project/py2exe/)
+* [cx_Freeze](https://anthony-tuininga.github.io/cx_Freeze/)
 
 ## Dependencies
 
