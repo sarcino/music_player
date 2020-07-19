@@ -2,8 +2,6 @@
 
 Desktop application, music player which will optionally play audios from YouTube and track music through Last.fm scrobbling
 
-Installer of music_player 1.0 can be found here: [https://www.dropbox.com/s/ssw1fplqzls5m9e/music_player_v1.0.exe?dl=0](https://www.dropbox.com/s/ssw1fplqzls5m9e/music_player_v1.0.exe?dl=0)
-
 In progress
 
 ## Built With
